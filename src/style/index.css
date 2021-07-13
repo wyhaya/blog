@@ -1,0 +1,49 @@
+@import url('./base.css');
+
+main {
+    min-height: var(--main-min-height);
+    display: flex;
+    padding: 0 14px 24px;
+    flex-direction: column;
+    align-items: center;
+}
+main h3,
+main ul {
+    width: 100%;
+    max-width: var(--content-width);
+}
+main h3 {
+    margin: 36px 0 14px 0;
+    color: #929292;
+    letter-spacing: 2px;
+    font-size: 16px;
+}
+main ul {
+    margin: 0;
+    padding-left: 26px;
+}
+main li {
+    margin-bottom: 14px;
+    list-style: circle;
+}
+main li:last-child {
+    margin-bottom: 0;
+}
+main a {
+    font-size: 18px;
+    line-height: 28px;
+    text-decoration: none;
+    color: #2a7ae2;
+}
+main a:hover {
+    text-decoration: underline;
+}
+main a:visited {
+    color: #1756a9;
+}
+
+@media (prefers-color-scheme: dark) {
+    main h3 {
+        color: #b4b4b4;
+    }
+}
