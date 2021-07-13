@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>在服务器上配置 ssh 密钥登录 - Blog</title>
+        <meta name="description" content="A personal website" />
+        <meta name="keywords" content="Blog, Idea, Thinking" />
+        <link rel="shortcut icon" href="/favicon.svg" />
+        <link rel="stylesheet" href="/style/blog.css" />
+    </head>
+    <body>
+        <header>
+            <div>
+                <a href="/"> Blog </a>
+            </div>
+        </header>
+
+        <main>
+            <article>
+                <h1>在服务器上配置 ssh 密钥登录</h1>
+                <time>2021-04-02</time>
+                <markdown> <h2 id="使用-ssh-keygen-创建-rsa-密钥">使用 ssh-keygen 创建 RSA 密钥</h2>
+<p>默认情况下 <code>ssh-keygen</code> 会生成一个 <code>2048</code> 位的密钥对，也可以根据需要使用 <code>-b 4096</code> 创建一个更大的 <code>4096</code> 位的密钥</p>
+<pre><code class="language-bash">ssh-keygen
+# or
+ssh-keygen -b 4096
+</code></pre>
+<p>默认情况下会在 <code>~/.ssh/</code> 目录下生成 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 两个文件，如果你这个目录下已经有 <code>id_rsa/id_rsa.pub</code> 了，命令行中会提示你已经存在，是否覆盖，覆盖的时候要小心，否则你之前的文件会丢失</p>
+<p>之后会提示你输入安全密码，这可以增加点安全性，可以根据自己的需要来决定</p>
+<h2 id="在服务器上配置公钥">在服务器上配置公钥</h2>
+<p>生成密钥之后需要把公钥放到服务器，有一个工具 <code>ssh-copy-id</code> 可以直接帮你做这个事情</p>
+<pre><code class="language-bash">ssh-copy-id user@host
+</code></pre>
+<p>这会把 <code>~/.ssh/id_rsa.pub</code> 的内容追加到服务器上的 <code>~/.ssh/authorized_keys</code> 文件中</p>
+<p>当提示你：</p>
+<pre><code>Number of key(s) added: 1
+
+Now try logging into the machine, with:   &quot;ssh &#39;user..@host..&#39;&quot;
+and check to make sure that only the key(s) you wanted were added.
+</code></pre>
+<p>这个时候就算完成了</p>
+<h3 id="手动复制">手动复制</h3>
+<p>也可以直接把 <code>id_rsa.pub</code> 的内容复制到服务器上</p>
+<pre><code class="language-bash">cat ~/.ssh/id_rsa.pub
+# 复制输出的内容
+</code></pre>
+<p>登录到你的服务器上，找到 <code>~/.ssh/authorized_keys</code> 文件，如果没有就新建一个，如果有的话就在下面追加 <code>id_rsa.pub</code> 的内容</p>
+<h2 id="客户端-ssh-配置">客户端 ssh 配置</h2>
+<p>如果不想每次都输入用户名和地址的话可以设置一个 <code>别名</code>，登录的时候只需要</p>
+<pre><code class="language-bash">ssh name..
+</code></pre>
+<p>在 ~/.ssh/ 中新建一个叫 <code>config</code> 的文件（如果没有的话）</p>
+<p>添加以下内容</p>
+<pre><code>Host 别名
+    User 用户名
+    HostName 地址
+    IdentityFile 私钥的地址(~/.ssh/id_rsa)
+</code></pre>
+<p>之后尝试一下登录</p>
+<pre><code class="language-bash">ssh 别名
+</code></pre>
+<p>如果可以登录成功，就表示成功了</p>
+<h2 id="禁用密码登录">禁用密码登录</h2>
+<p>现在已经配置了证书登录，为了增加安全性，我们在这里禁用服务器的密码登录</p>
+<p>在服务器上编辑 <code>ssh</code> 的配置文件</p>
+<pre><code class="language-bash">sudo vi /etc/ssh/sshd_config
+</code></pre>
+<p>找到名为 <code>PasswordAuthentication</code> 的配置项，它后面跟的应该是 <code>yes</code>, 把这个 <code>yes</code> 改为 <code>no</code> 来禁用密码登录</p>
+<pre><code>...
+# PasswordAuthentication yes
+PasswordAuthentication no
+...
+</code></pre>
+<p>重启 <code>ssh</code> 服务进程</p>
+<pre><code class="language-bash">sudo systemctl restart sshd.service
+</code></pre>
+<p>为了防止意外发生，先不要退出，然后在客户端再次尝试登录</p>
+<pre><code class="language-bash">ssh 别名
+# or
+ssh user@host
+</code></pre>
+<p>如果有证书密码的话，会要求输入证书密码，接着登录成功</p>
+<h2 id="完">完</h2>
+ </markdown>
+            </article>
+        </main>
+
+        <footer>
+            <p>
+                ©️ copyright 2018
+                <a href="mailto:wyhaya@gmail.com">Email</a>
+                <a href="https://github.com/wyhaya">GitHub</a>
+            </p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,327 @@
+@import url('./base.css');
+
+main {
+    min-height: var(--main-min-height);
+    display: flex;
+    justify-content: center;
+}
+main > article {
+    max-width: var(--content-width);
+    width: 100%;
+    padding-bottom: 60px;
+}
+main > article > h1 {
+    font-size: 36px;
+}
+main > article > time {
+    font-size: 14px;
+    color: #929292;
+    display: block;
+    margin-bottom: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+    main > article > h1 {
+        color: #dcdcdc;
+    }
+}
+
+markdown {
+    color: #24292e;
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    display: block;
+}
+markdown::before {
+    display: table;
+    content: '';
+}
+markdown::after {
+    display: table;
+    clear: both;
+    content: '';
+}
+markdown * {
+    box-sizing: border-box;
+}
+markdown > *:first-child {
+    margin-top: 0 !important;
+}
+markdown > *:last-child {
+    margin-bottom: 0 !important;
+}
+markdown a {
+    color: #0366d6;
+    text-decoration: none;
+}
+markdown a:active,
+markdown a:hover {
+    outline-width: 0;
+    text-decoration: underline;
+}
+markdown a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+}
+markdown img {
+    border-style: none;
+    max-width: 100%;
+    box-sizing: initial;
+}
+markdown img[align='right'] {
+    padding-left: 20px;
+}
+markdown img[align='left'] {
+    padding-right: 20px;
+}
+markdown hr {
+    height: 0.25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #e1e4e8;
+    border: 0;
+}
+markdown hr::before {
+    display: table;
+    content: '';
+}
+markdown hr::after {
+    display: table;
+    clear: both;
+    content: '';
+}
+markdown blockquote {
+    margin: 0;
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+}
+markdown blockquote > :first-child {
+    margin-top: 0;
+}
+markdown blockquote > :last-child {
+    margin-bottom: 0;
+}
+markdown kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font: 11px 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    line-height: 10px;
+    color: #444d56;
+    vertical-align: middle;
+    background-color: #fafbfc;
+    border: solid 1px #d1d5da;
+    border-bottom-color: #c6cbd1;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #c6cbd1;
+}
+markdown table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+markdown table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+}
+markdown table th {
+    font-weight: 600;
+}
+markdown table th,
+markdown table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+markdown table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+markdown table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+markdown h1,
+markdown h2,
+markdown h3,
+markdown h4,
+markdown h5,
+markdown h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+markdown h1 {
+    padding-bottom: 0.3em;
+    font-size: 2em;
+    border-bottom: 1px solid #eaecef;
+}
+markdown h2 {
+    padding-bottom: 0.3em;
+    font-size: 1.5em;
+    border-bottom: 1px solid #eaecef;
+}
+markdown h3 {
+    font-size: 1.25em;
+}
+markdown h4 {
+    font-size: 1em;
+}
+markdown h5 {
+    font-size: 0.875em;
+}
+markdown h6 {
+    font-size: 0.85em;
+    color: #6a737d;
+}
+markdown p {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+markdown code,
+markdown kbd,
+markdown pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+markdown code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    border-radius: 3px;
+    font-size: 85%;
+    background-color: rgba(27, 31, 35, 0.05);
+}
+markdown pre {
+    word-wrap: normal;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+markdown pre > code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+}
+markdown pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+}
+markdown [type='checkbox'] {
+    box-sizing: border-box;
+    padding: 0;
+}
+markdown ul,
+markdown ol {
+    padding-left: 2em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+markdown ol ol,
+markdown ul ol {
+    list-style-type: lower-roman;
+}
+markdown ul ul ol,
+markdown ul ol ol,
+markdown ol ul ol,
+markdown ol ol ol {
+    list-style-type: lower-alpha;
+}
+markdown dd {
+    margin-left: 0;
+}
+markdown p,
+markdown blockquote,
+markdown ul,
+markdown ol,
+markdown dl,
+markdown table,
+markdown pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+markdown ul ul,
+markdown ul ol,
+markdown ol ol,
+markdown ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+markdown li {
+    word-wrap: break-all;
+}
+markdown li > p {
+    margin-top: 16px;
+}
+markdown li + li {
+    margin-top: 0.25em;
+}
+markdown dl {
+    padding: 0;
+}
+markdown dl dt {
+    padding: 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600;
+}
+markdown dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1e2022;
+    }
+    markdown {
+        color: #d5d5d5;
+    }
+    markdown pre {
+        background-color: #282828;
+    }
+    markdown code {
+        background-color: #282828;
+    }
+    markdown table tr {
+        background-color: #282828;
+    }
+    markdown table tr:nth-child(2n) {
+        background-color: #3b3b3b;
+    }
+    markdown table th,
+    markdown table td {
+        border: 1px solid #575757;
+    }
+    markdown h1 {
+        border-bottom: 1px solid #575757;
+    }
+    markdown h2 {
+        border-bottom: 1px solid #575757;
+    }
+    markdown hr {
+        background-color: #666666;
+    }
+    markdown blockquote {
+        border-left: 0.25em solid #555555;
+    }
+}
